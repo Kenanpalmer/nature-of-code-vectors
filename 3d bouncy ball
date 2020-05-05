@@ -1,0 +1,53 @@
+Random rand = new Random();
+ArrayList Pos;
+ArrayList Vel;
+int numBalls = 2;  //number of balls
+int currentBall = 0; 
+float boxsize; //size of frame the balls bounce around
+float x,y,z;
+Pvector ball;
+Pvector velo;
+
+
+void setup() {
+ball = new Pvector(200,200,0);
+velo = new Pvector(10,5,3);
+
+Pos = new ArrayList();
+Vel = new ArrayList();
+
+
+
+  size(800,800,P3D);
+  background(0);
+  lights();
+  x = width/2;
+  y = height/2;
+  z = 0;
+  boxsize =450;
+}
+
+void draw() {
+  background(0);
+  translate(400,400,0);
+  
+  pushMatrix();
+  stroke(255);
+  noFill();
+  translate(0, 0, 0);
+  box(boxsize);
+  popMatrix();
+  
+  ball.add(velo);
+  
+  if ((ball.x > boxsize/2) || ball.x < -1*(boxsize/2)){
+    velo.x = velo.x * -1;
+  }
+  if ((ball.y > boxsize/2) || ball.y < -1*(boxsize/2)){
+    velo.y = velo.y * -1;
+  }
+  if ((ball.z > boxsize/2) || ball.z < -1*(boxsize/2)) {
+    velo.z = velo.z * -1;
+  }
+   ball.display();
+}
